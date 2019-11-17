@@ -8,6 +8,13 @@ module.exports = gql`
         body: String!
         createdAt: String!
         username: String!
+        categories: [Categorie]!
+    }
+
+    type Categorie{
+        id: ID!
+        body: String!
+        createdAt: String!
     }
 
     type User{
@@ -27,10 +34,13 @@ module.exports = gql`
 
     type Query{
         getProducts: [Product]
+        getProduct(productId: ID!): Product
     }
 
     type Mutation{
         register(registerInput: RegisterInput): User!
-        login(username: String!, password: String!): User!
+        login(email: String!, password: String!): User!
+        createProduct(body: String!): Product!
+        deleteProduct(productId: ID!): String!
     }
 `
