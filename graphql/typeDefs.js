@@ -42,5 +42,11 @@ module.exports = gql`
         login(email: String!, password: String!): User!
         createProduct(body: String!): Product!
         deleteProduct(productId: ID!): String!
+        createCategorie(productId: String!, body: String!): Product!
+        deleteCategorie(productId: String!, categorieId: String!): Product!
+    }
+
+    type Subscription{
+        newProduct: Product!
     }
 `

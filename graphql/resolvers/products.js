@@ -40,6 +40,10 @@ module.exports = {
 
             const product = await newProduct.save()
 
+            context.pubsub.publish('NEW_PRODUCT', {
+                newProduct: product
+            })
+
             return product
         },
         async deleteProduct(_, { productId }, context){
@@ -57,6 +61,11 @@ module.exports = {
             } catch(err){
                 throw new Error(err)
             }
+        }
+    },
+    Subscription: {
+        newProduct: {
+            subscribe: (_, __, { pubsub }) => pubsub.asyncIterator('NEW_PRODUCT')
         }
     }
 }
